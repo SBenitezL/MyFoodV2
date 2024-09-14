@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderState {
+public class Ingredient {
     private String id;
-    private String state;
+    private String name;
 }
