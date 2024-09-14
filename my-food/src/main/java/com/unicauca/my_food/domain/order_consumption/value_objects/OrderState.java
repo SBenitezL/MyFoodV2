@@ -1,13 +1,29 @@
 package com.unicauca.my_food.domain.order_consumption.value_objects;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.UUID;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+import com.unicauca.my_food.domain.order_consumption.constans.OrderStateConstans;
+
+import lombok.Getter;
+
+@Getter
 public class OrderState {
     private String id;
     private String state;
+
+    public OrderState(int state){
+        this.id = UUID.randomUUID().toString();
+        this.state = this.selectState(state);
+    }
+
+    public String selectState(int state){
+        if(state == 0)
+            return OrderStateConstans.ORDER_STATE_PROCESING;
+        else if(state == 1)
+            return OrderStateConstans.ORDER_STATE_COMPLETED;
+        else if(state == 2)
+            return OrderStateConstans.ORDER_STATE_CANCELLED;
+        else
+            return OrderStateConstans.ORDER_STATE_ERROR;
+    }
 }
