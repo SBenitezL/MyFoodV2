@@ -8,6 +8,11 @@ import com.unicauca.my_food.domain.inventory.value_objects.ProductName;
 import com.unicauca.my_food.domain.inventory.value_objects.Stock;
 import com.unicauca.my_food.domain.inventory.value_objects.Units;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public class Product implements IProduct {
     private String id;
     private ProductName name;
@@ -19,20 +24,33 @@ public class Product implements IProduct {
 
     @Override
     public boolean decreaseStock(int amount) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'decreaseStock'");
+        // Calcula la nueva cantidad
+        amount = this.stock.getAmount() - amount;
+        // Determina si es válida la nueva cantidad.
+        if (amount < 0)
+            return false;
+        // Actualiza el inventario
+        this.stock = new Stock(amount);
+        return true;
     }
 
     @Override
     public boolean markExpired() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'markExpired'");
+        // Determina si esta vencido el producto
+        this.isExpired = this.usefulLife.after(new Date());
+        return isExpired;
     }
 
     @Override
     public boolean increaseStock(int amount) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'increaseStock'");
+        // Verifica que la cantidad a ingresar sea válida.
+        if (amount <= 0)
+            return false;
+        // Calcula la nueva cantidad
+        amount += this.stock.getAmount();
+        // Actualiza la nueva cantidad
+        this.stock = new Stock(amount);
+        return true;
     }
 
 }
