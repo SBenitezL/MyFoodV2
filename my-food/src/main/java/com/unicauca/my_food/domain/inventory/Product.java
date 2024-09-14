@@ -5,8 +5,8 @@ import java.util.Locale.Category;
 
 import com.unicauca.my_food.domain.inventory.value_objects.Stock;
 
-public class Producto {
-    private Long id;
+public class Product {
+    private String id;
     private Category category;
     private Stock stock;
     private Date usefulLife;
