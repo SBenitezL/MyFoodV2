@@ -1,10 +1,10 @@
 package com.unicauca.my_food.domain.order_consumption.value_objects;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ingredient {
