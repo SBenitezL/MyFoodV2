@@ -36,7 +36,7 @@ public class OrderRepository {
     }
 
     public boolean update(String oldOrderId, Order newOrder){
-        if(this.db.containsKey(oldOrderId))
+        if(!this.db.containsKey(oldOrderId))
             return false;
 
         this.db.remove(oldOrderId);
