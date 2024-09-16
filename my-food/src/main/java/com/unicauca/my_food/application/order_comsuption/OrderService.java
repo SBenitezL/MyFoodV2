@@ -1,4 +1,4 @@
-package com.unicauca.my_food.application;
+package com.unicauca.my_food.application.order_comsuption;
 
 import org.springframework.stereotype.Service;
 
