@@ -12,5 +12,5 @@ public interface IOrderDomainService {
     public boolean removeIngredient(Dish dish, String idIngredient);
     public String getOrderDate(Order order);
     public String getOrderHour(Order order);
-    public boolean calculateTotalPrice(Order order);
+    public double calculateTotalPrice(Order order);
 }

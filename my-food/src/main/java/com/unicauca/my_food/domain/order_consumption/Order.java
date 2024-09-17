@@ -8,6 +8,8 @@ import com.unicauca.my_food.domain.order_consumption.value_objects.Dish;
 import com.unicauca.my_food.domain.order_consumption.value_objects.OrderDate;
 import com.unicauca.my_food.domain.order_consumption.value_objects.OrderState;
 import com.unicauca.my_food.domain.order_consumption.value_objects.TotalPrice;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNotFoundException;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
 
 import lombok.Getter;
 
@@ -34,7 +36,10 @@ public class Order {
 
     public boolean addDish(Dish dish){
         if(this.dishes == null)
-            return false;
+            throw new ObjectNullException("Dishes is null...");
+
+        if(dish == null)
+            throw new ObjectNullException("Dish is null...");
 
         this.dishes.add(dish);
         return true;
@@ -42,7 +47,10 @@ public class Order {
 
     public boolean removeDish(String id){
         if(this.dishes == null)
-            return false;
+            throw new ObjectNullException("Dishes is null...");
+
+        if(id.isBlank())
+            throw new ObjectNullException("Dish's id is null...");
 
         for(int i = 0 ; i < this.dishes.size() ; i++){
             if(this.dishes.get(i).getId().equals(id)){
@@ -51,7 +59,7 @@ public class Order {
             }
         }
 
-        return false;
+        throw new ObjectNotFoundException("Dish was not found...");
     }
 
 }

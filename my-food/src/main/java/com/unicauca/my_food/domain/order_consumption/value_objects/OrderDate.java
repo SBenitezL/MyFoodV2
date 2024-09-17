@@ -5,6 +5,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
+
 import lombok.Getter;
 
 @Getter
@@ -21,7 +23,7 @@ public class OrderDate {
     
     public String getOrderDate(){
         if(this.date == null || this.getDate() == null)
-            return "error";
+            throw new ObjectNullException("Date is null...");
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return this.getDate().format(dateFormatter);
@@ -29,7 +31,7 @@ public class OrderDate {
 
     public String getOrderHour(){
         if(this.date == null || this.getHour() == null)
-            return "error";
+            throw new ObjectNullException("Date or Hour is null...");
 
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss"); 
         return this.getDate().format(timeFormatter);

@@ -13,6 +13,7 @@ import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.Business
 import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.NoDataException;
 import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectExistsException;
 import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNotFoundException;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
 import com.unicauca.my_food.infrastucture.exceptionHandler.exceptionStructure.Error;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public class RestApiException {
     } 
 
     @ExceptionHandler(ObjectExistsException.class)
-    public ResponseEntity<Error> handleEntityExistscException(final HttpServletRequest req,
+    public ResponseEntity<Error> handleObjectExistscException(final HttpServletRequest req,
                     final ObjectExistsException ex) {
         final Error error = ErrorUtils
                         .createError(ErrorCode.OBJECT_EXISTS.getCode(),
@@ -56,7 +57,7 @@ public class RestApiException {
     }
 
     @ExceptionHandler(ObjectNotFoundException.class)
-    public ResponseEntity<Error> handleNotFoundException(final HttpServletRequest req,
+    public ResponseEntity<Error> handleObjectNotFoundException(final HttpServletRequest req,
                     final ObjectNotFoundException ex, final Locale locale) {
         final Error error = ErrorUtils
                         .createError(ErrorCode.OBJECT_NOT_FOUND.getCode(),
@@ -75,6 +76,19 @@ public class RestApiException {
                         .createError(ErrorCode.BUSINESS_RULE_VIOLATION.getCode(),
                                         String.format("%s, %s",
                                         ErrorCode.BUSINESS_RULE_VIOLATION.getMessageKey(),
+                                        ex.getMessage()),
+                                        HttpStatus.NOT_ACCEPTABLE.value())
+                                        .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ObjectNullException.class)
+    public ResponseEntity<Error> handleObjectNullException(final HttpServletRequest req,
+                    final ObjectNullException ex, final Locale locale) {
+        final Error error = ErrorUtils
+                        .createError(ErrorCode.OBJECT_NULL.getCode(),
+                                        String.format("%s, %s",
+                                        ErrorCode.OBJECT_NULL.getMessageKey(),
                                         ex.getMessage()),
                                         HttpStatus.NOT_ACCEPTABLE.value())
                                         .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());

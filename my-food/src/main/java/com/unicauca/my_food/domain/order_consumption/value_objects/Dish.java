@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNotFoundException;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,7 +27,10 @@ public class Dish {
 
     public boolean addIngredient(Ingredient ingredient){
         if(this.ingredients == null)
-            return false;
+            throw new ObjectNullException("Ingredients is null...");
+        
+        if(ingredient == null)
+            throw new ObjectNullException("Ingredient is null...");
 
         this.ingredients.add(ingredient);
         return true;
@@ -32,7 +38,10 @@ public class Dish {
 
     public boolean removeIngredient(String id){
         if(this.ingredients == null)
-            return false;
+            throw new ObjectNullException("Ingredients is null...");
+        
+        if(id.isBlank())
+            throw new ObjectNullException("Ingredient's id is null...");
 
         for(int i = 0 ; i < this.ingredients.size() ; i++){
             if(this.ingredients.get(i).getId().equals(id)){
@@ -41,6 +50,6 @@ public class Dish {
             }
         }
 
-        return false;
+        throw new ObjectNotFoundException("id was not found...");
     }
 }

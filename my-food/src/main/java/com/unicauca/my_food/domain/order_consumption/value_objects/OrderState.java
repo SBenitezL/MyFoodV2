@@ -3,6 +3,7 @@ package com.unicauca.my_food.domain.order_consumption.value_objects;
 import java.util.UUID;
 
 import com.unicauca.my_food.domain.order_consumption.constants.OrderStateConstans;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.BusinessRuleException;
 
 import lombok.Getter;
 
@@ -24,6 +25,6 @@ public class OrderState {
         else if(state == 2)
             return OrderStateConstans.ORDER_STATE_CANCELLED;
         else
-            return OrderStateConstans.ORDER_STATE_ERROR;
+            throw new BusinessRuleException("State is no valid...");
     }
 }
