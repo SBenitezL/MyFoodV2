@@ -2,7 +2,7 @@ package com.unicauca.my_food.domain.order_consumption.value_objects;
 
 import java.util.UUID;
 
-import com.unicauca.my_food.domain.order_consumption.constans.OrderStateConstans;
+import com.unicauca.my_food.domain.order_consumption.constants.OrderStateConstans;
 
 import lombok.Getter;
 
