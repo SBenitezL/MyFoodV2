@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.unicauca.my_food.domain.order_consumption.Order;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectExistsException;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNotFoundException;
 
 @Repository
 public class OrderRepository {
@@ -22,14 +24,14 @@ public class OrderRepository {
 
     public Order findById(String orderId){
         if(!this.db.containsKey(orderId))
-            return null;
+            throw new ObjectNotFoundException("Object was not found...");
 
         return this.db.get(orderId);
     }
 
     public boolean save(Order order){
         if(this.db.containsKey(order.getId()))
-            return false;
+            throw new ObjectExistsException("Object exists...");
 
         this.db.put(order.getId(), order);
         return true;
@@ -37,7 +39,7 @@ public class OrderRepository {
 
     public boolean update(String oldOrderId, Order newOrder){
         if(!this.db.containsKey(oldOrderId))
-            return false;
+            throw new ObjectNotFoundException("Object was not found...");
 
         this.db.remove(oldOrderId);
         return this.save(newOrder);
@@ -45,7 +47,7 @@ public class OrderRepository {
 
     public boolean delete(String orderId){
         if(!this.db.containsKey(orderId))
-            return false;
+            throw new ObjectNotFoundException("Object was not found...");
         
         this.db.remove(orderId);
         return true;
