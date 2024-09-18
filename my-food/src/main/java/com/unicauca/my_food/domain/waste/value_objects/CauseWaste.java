@@ -1,5 +1,7 @@
 package com.unicauca.my_food.domain.waste.value_objects;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,7 +18,7 @@ public class CauseWaste {
     public CauseWaste(int causeIndex){
         this.id = UUID.randomUUID().toString();
         this.description = selectCause(causeIndex);
-        this.causes = CauseWasteConstants.getAllCauses();
+        this.causes = Collections.unmodifiableList(CauseWasteConstants.getAllCauses());
     }
 
     public String selectCause(int causeIndex){
@@ -27,7 +29,7 @@ public class CauseWaste {
         }
     }
 
-    public boolean validCause(String cause){
+    public boolean isValidCause(String cause){
         return causes.contains(cause);
     }
 }

@@ -34,4 +34,8 @@ public class QuantityWaste {
         this.totalWasteQuantity -= quantity;
         return true;
     }
+
+    public boolean isPositive(){
+        return this.totalWasteQuantity > 0;
+    }
 }

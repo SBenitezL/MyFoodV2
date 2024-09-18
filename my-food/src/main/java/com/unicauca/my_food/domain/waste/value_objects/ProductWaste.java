@@ -8,13 +8,13 @@ import lombok.Getter;
     @Getter
     public class ProductWaste {
         private Product product;
-        private String productWasteId;
-        private ProductName nameProductWaste;
+        private String productId;
+        private ProductName nameProduct;
 
         public ProductWaste(Product product){
             this.product = product;
-            this.productWasteId = this.product.getId(); //Revisar
-            this.nameProductWaste = this.product.getName();
+            this.productId = product.getId(); //Revisar
+            this.nameProduct = product.getName();
         }
         
         public String getDetailsProduct(){
