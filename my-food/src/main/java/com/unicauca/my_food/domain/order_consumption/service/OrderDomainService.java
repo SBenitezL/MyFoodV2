@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Service
 @NoArgsConstructor
 public class OrderDomainService implements IOrderDomainService{
-    private final int MAX_STATE_AVAIBLE = 2;
+    private final int MAX_STATE_AVAIBLE = 3;
 
     @Override
     public boolean changeOrderState(Order order, int state) {
@@ -78,7 +78,7 @@ public class OrderDomainService implements IOrderDomainService{
         if(order == null)
             throw new ObjectNullException("Order is null...");
 
-        return order.getDate().getOrderDate();
+        return order.getDate().getDate();
     }
 
     @Override
@@ -86,7 +86,7 @@ public class OrderDomainService implements IOrderDomainService{
         if(order == null)
             throw new ObjectNullException("Order is null...");
 
-        return order.getDate().getOrderDate();
+        return order.getDate().getHour();
     }
 
     @Override
