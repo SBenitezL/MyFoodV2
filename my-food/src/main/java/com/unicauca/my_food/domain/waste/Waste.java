@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import com.unicauca.my_food.domain.inventory.Product;
 import com.unicauca.my_food.domain.waste.service.IReductionSuggester;
-import com.unicauca.my_food.domain.waste.service.WasteReductionSuggester;
 import com.unicauca.my_food.domain.waste.value_objects.CauseWaste;
 import com.unicauca.my_food.domain.waste.value_objects.QuantityWaste;
 
@@ -22,10 +21,10 @@ public class Waste {
     private Date dateRegister; 
     private List<Product> productsWaste;
 
-    public Waste(Product product, double quantityWaste, CauseWaste cause){
+    public Waste(Product product, double initialQuantityWaste, CauseWaste cause){
         this.idWaste = UUID.randomUUID().toString();
         this.productId = product.getId();
-        this.quantityWaste = new QuantityWaste(0);
+        this.quantityWaste = new QuantityWaste(initialQuantityWaste);
         this.cause = cause;
         this.dateRegister = new Date();
         this.productsWaste = new ArrayList<>();
