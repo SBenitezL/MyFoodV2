@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.unicauca.my_food.domain.inventory.Product;
-import com.unicauca.my_food.domain.waste.service.IReductionSuggester;
+import com.unicauca.my_food.domain.waste.constants.CauseWasteConstants;
 import com.unicauca.my_food.domain.waste.value_objects.CauseWaste;
 import com.unicauca.my_food.domain.waste.value_objects.QuantityWaste;
 
@@ -37,9 +37,23 @@ public class Waste {
             throw new IllegalArgumentException("La cantidad de desperdicio debe ser positiva.");
     }
 
-    public void suggestReductionMeasures(IReductionSuggester suggester){
-        String suggestions = suggester.suggest(this);
-        System.out.println(suggestions);
+    public String suggestReductionMeasures() {
+        StringBuilder suggestions = new StringBuilder();
+        double totalWaste = this.quantityWaste.getTotalWasteQuantity();
+        if (totalWaste > 75) 
+            suggestions.append("Reducción sugerida: La cantidad de desperdicio es extremadamente alta. Reevalúa la planificación.\n");
+        else if (totalWaste > 50)
+            suggestions.append("Reducción sugerida: Revisa los procedimientos para evitar sobrepreparación o mal almacenamiento.\n");
+        else if (totalWaste > 25) 
+            suggestions.append("Reducción sugerida: Podría ser necesario ajustar la gestión del inventario y las porciones.\n");
+        else 
+            suggestions.append("Reducción sugerida: El nivel de desperdicio es bajo, sigue con las buenas prácticas.\n");
+
+        String causeDescription = this.cause.getDescription();
+        String suggestion = CauseWasteConstants.CAUSE_SUGGESTIONS.getOrDefault(causeDescription, "Sugerencia: Analiza más a fondo las causas para proponer acciones correctivas.");
+        suggestions.append(suggestion).append("\n");
+
+        return suggestions.toString();
     }
 }
 
