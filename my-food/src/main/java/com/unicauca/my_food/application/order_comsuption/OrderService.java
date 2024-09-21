@@ -93,11 +93,12 @@ public class OrderService implements IOrderService{
     }
 
     @Override
-    public Order addDish(String idOrder, Dish dish) {
+    public Order addDish(String idOrder, String dishName, double dishValue) {
         Order order = this.repository.findById(idOrder);
         if(order == null)
             throw new ObjectNotFoundException("Order was not found");
 
+        Dish dish = new Dish(dishName, dishValue);
         this.serviceDomain.addDish(order, dish);
         return order;
     }

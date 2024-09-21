@@ -5,35 +5,29 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
-import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
-
 import lombok.Getter;
 
 @Getter
 public class OrderDate {
     private String id;
-    private LocalDate date;
-    private LocalTime hour;
+    private String date;
+    private String hour;
 
     public OrderDate(){
         this.id = UUID.randomUUID().toString();
-        this.date = LocalDate.now();
-        this.hour = LocalTime.now();
+        createOrderDate();
+        createOrderHour();
     }
     
-    public String getOrderDate(){
-        if(this.date == null || this.getDate() == null)
-            throw new ObjectNullException("Date is null...");
-
+    private void createOrderDate(){
+        LocalDate myDate = LocalDate.now();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return this.getDate().format(dateFormatter);
+        this.date = myDate.format(dateFormatter);
     }   
 
-    public String getOrderHour(){
-        if(this.date == null || this.getHour() == null)
-            throw new ObjectNullException("Date or Hour is null...");
-
+    private void createOrderHour(){
+        LocalTime myHour = LocalTime.now();
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss"); 
-        return this.getDate().format(timeFormatter);
+        this.hour = myHour.format(timeFormatter);
     }
 }

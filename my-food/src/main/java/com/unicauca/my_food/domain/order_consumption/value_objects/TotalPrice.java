@@ -21,6 +21,7 @@ public class TotalPrice {
         if(dishes.isEmpty())
             throw new BusinessRuleException("there are no dish to calculate a total price...");
 
+        this.totalPrice = 0;
         dishes.forEach(dish -> this.totalPrice = this.totalPrice + dish.getPrice());
         return this.totalPrice;
     }   
