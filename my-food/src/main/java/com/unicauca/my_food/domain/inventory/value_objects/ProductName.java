@@ -1,8 +1,10 @@
 package com.unicauca.my_food.domain.inventory.value_objects;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class ProductName {
     private String name;
 

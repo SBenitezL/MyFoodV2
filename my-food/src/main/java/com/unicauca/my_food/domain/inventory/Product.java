@@ -10,9 +10,11 @@ import com.unicauca.my_food.domain.inventory.value_objects.Units;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Product {
     private String id;
     private ProductName name;
