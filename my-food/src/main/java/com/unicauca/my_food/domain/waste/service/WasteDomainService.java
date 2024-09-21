@@ -1,12 +1,17 @@
 package com.unicauca.my_food.domain.waste.service;
 
-import com.unicauca.my_food.domain.inventory.Product;
+import org.springframework.stereotype.Service;
+
 import com.unicauca.my_food.domain.waste.Waste;
 import com.unicauca.my_food.domain.waste.value_objects.CauseWaste;
 import com.unicauca.my_food.domain.waste.value_objects.ProductWaste;
 import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.BusinessRuleException;
 import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
 
+import lombok.NoArgsConstructor;
+
+@Service
+@NoArgsConstructor
 public class WasteDomainService implements IWasteDomainService {
 
     @Override

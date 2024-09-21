@@ -2,6 +2,8 @@ package com.unicauca.my_food.application.waste;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.unicauca.my_food.domain.waste.Waste;
 import com.unicauca.my_food.domain.waste.service.WasteDomainService;
 import com.unicauca.my_food.domain.waste.value_objects.CauseWaste;
@@ -10,6 +12,7 @@ import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNo
 import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
 import com.unicauca.my_food.infrastucture.repositories.WasteRepository;
 
+@Service
 public class WasteService implements IWasteService{
     private final WasteDomainService domainService;
     private final WasteRepository repository;
