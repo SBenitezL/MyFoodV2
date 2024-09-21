@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.unicauca.my_food.domain.waste.Waste;
 import com.unicauca.my_food.domain.waste.service.WasteDomainService;
+import com.unicauca.my_food.domain.waste.value_objects.CauseWaste;
+import com.unicauca.my_food.domain.waste.value_objects.ProductWaste;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNotFoundException;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
 import com.unicauca.my_food.infrastucture.repositories.WasteRepository;
 
 public class WasteService implements IWasteService{
@@ -17,44 +21,82 @@ public class WasteService implements IWasteService{
 
     @Override
     public Waste createWaste(Waste waste) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createWaste'");
+        this.repository.save(waste);
+        return waste;
     }
 
     @Override
     public Waste getWasteById(String wasteId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getWasteById'");
+        Waste waste = this.repository.findById(wasteId);
+        if(waste == null) 
+            throw new ObjectNullException("Waste is null...");
+
+        return waste;
     }
 
     @Override
     public List<Waste> getAllWaste() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllWaste'");
+        return this.repository.findAll();
     }
 
     @Override
     public void updateWaste(String wasteId, Waste waste) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateWaste'");
+        Waste existingWaste = this.repository.findById(wasteId);
+        if(existingWaste == null)
+            throw new ObjectNotFoundException("Waste not found...");
+
+        this.repository.update(wasteId, waste);
     }
 
     @Override
     public void deleteWaste(String wasteId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteWaste'");
+        Waste waste = this.repository.findById(wasteId);
+        if(waste == null)
+            throw new ObjectNotFoundException("Waste not found...");
+
+        this.repository.delete(wasteId);       
     }
 
     @Override
     public void registerWaste(String wasteId, double quantity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'registerWaste'");
+        Waste waste = this.repository.findById(wasteId);
+        if(waste == null)
+            throw new ObjectNotFoundException("Waste not found...");
+
+        this.domainService.addQuantity(waste, quantity);
     }
 
     @Override
     public void suggestReductionMeasures(String wasteId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'suggestReductionMeasures'");
+        Waste waste = this.repository.findById(wasteId);
+        if(waste == null)
+            throw new ObjectNotFoundException("Waste not found...");
+
+        this.domainService.suggestReductionMeasures(waste);
+    }
+
+    @Override
+    public String getDetailsProduct(ProductWaste product) {
+        if(product == null)
+            throw new ObjectNotFoundException("Waste not found...");
+
+        return this.domainService.getDetailsProduct(product);
+    }
+
+    @Override
+    public String selectCause(CauseWaste cause, int causeIndex) {
+        if(cause == null) 
+            throw new ObjectNotFoundException("Waste not found...");
+
+        return this.domainService.selectCause(cause, causeIndex);
+    }
+
+    @Override
+    public boolean isValidCause(CauseWaste cause) {
+        if (cause == null) {
+            throw new ObjectNotFoundException("CauseWaste is null");
+        }
+        return this.domainService.isValidCause(cause);
     }
     
 }
