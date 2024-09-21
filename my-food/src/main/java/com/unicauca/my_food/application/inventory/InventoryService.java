@@ -37,7 +37,7 @@ public class InventoryService implements IInventoryService {
 
     @Override
     public Product update(Product product) {
-        return this.update(product);
+        return this.repository.update(product);
     }
 
     @Override
@@ -59,6 +59,16 @@ public class InventoryService implements IInventoryService {
         List<Product> data = this.repository.findAll();
         for (Product value : data)
             this.serviceDomain.markExpired(value);
+    }
+
+    @Override
+    public Product findById(String id) {
+        return this.repository.delete(id);
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return this.repository.findAll();
     }
 
 }

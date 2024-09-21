@@ -11,7 +11,11 @@ public interface IInventoryService {
 
     Product delete(String id);
 
+    Product findById(String id);
+
     List<Product> productsExpired();
+
+    List<Product> findAll();
 
     Product increase(String id, int amount);
 
