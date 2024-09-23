@@ -93,13 +93,5 @@ public class WasteService implements IWasteService{
 
         return this.domainService.selectCause(cause, causeIndex);
     }
-
-    @Override
-    public boolean isValidCause(CauseWaste cause) {
-        if (cause == null) {
-            throw new ObjectNotFoundException("CauseWaste is null");
-        }
-        return this.domainService.isValidCause(cause);
-    }
     
 }

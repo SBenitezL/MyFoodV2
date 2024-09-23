@@ -21,8 +21,6 @@ import com.unicauca.my_food.domain.waste.value_objects.ProductWaste;
 
 import lombok.RequiredArgsConstructor;
 
-
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/wastes")
@@ -83,10 +81,4 @@ public class WasteRestController {
         return new ResponseEntity<String>(selectedCause, HttpStatus.OK);
     }
 
-    @PostMapping("/cause/validate")
-    public ResponseEntity<Boolean> isValidCause(@RequestBody CauseWaste cause) {
-        boolean isValid = service.isValidCause(cause);
-        return new ResponseEntity<Boolean>(isValid, HttpStatus.OK);
-    }
-    
 }

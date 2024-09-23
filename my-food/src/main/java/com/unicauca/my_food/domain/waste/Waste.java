@@ -11,8 +11,10 @@ import com.unicauca.my_food.domain.waste.value_objects.CauseWaste;
 import com.unicauca.my_food.domain.waste.value_objects.QuantityWaste;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class Waste {
     private String idWaste;
     private String productId;
@@ -30,23 +32,35 @@ public class Waste {
         this.productsWaste = new ArrayList<>();
     }
 
-    public void registerWaste(double quantity){
-        if(quantity > 0)
+   /**
+     * Registra una cantidad de desperdicio para el objeto Waste.
+     *
+     * @param quantity La cantidad de desperdicio a registrar.
+     * @throws IllegalArgumentException Si la cantidad es negativa o cero.
+     */
+    public void registerWaste(double quantity) {
+        if (quantity > 0)
             this.quantityWaste.addQuantity(quantity);
         else
             throw new IllegalArgumentException("La cantidad de desperdicio debe ser positiva.");
     }
 
+    /**
+     * Sugiere medidas para la reducción del desperdicio basado en la cantidad total de desperdicio registrado
+     * y la causa del desperdicio.
+     *
+     * @return Una cadena que contiene las sugerencias para la reducción del desperdicio.
+     */
     public String suggestReductionMeasures() {
         StringBuilder suggestions = new StringBuilder();
         double totalWaste = this.quantityWaste.getTotalWasteQuantity();
-        if (totalWaste > 75) 
+        if (totalWaste > 75)
             suggestions.append("Reducción sugerida: La cantidad de desperdicio es extremadamente alta. Reevalúa la planificación.\n");
         else if (totalWaste > 50)
             suggestions.append("Reducción sugerida: Revisa los procedimientos para evitar sobrepreparación o mal almacenamiento.\n");
-        else if (totalWaste > 25) 
+        else if (totalWaste > 25)
             suggestions.append("Reducción sugerida: Podría ser necesario ajustar la gestión del inventario y las porciones.\n");
-        else 
+        else
             suggestions.append("Reducción sugerida: El nivel de desperdicio es bajo, sigue con las buenas prácticas.\n");
 
         String causeDescription = this.cause.getDescription();
