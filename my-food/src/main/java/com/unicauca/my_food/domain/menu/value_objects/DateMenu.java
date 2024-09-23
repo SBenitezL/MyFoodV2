@@ -1,30 +1,27 @@
 package com.unicauca.my_food.domain.menu.value_objects;
+
 import java.time.LocalDate;
 import lombok.Getter;
-import java.util.UUID;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
 import java.time.format.DateTimeFormatter;
 
 
 @Getter
 
 public class DateMenu {
-    private String id;
-    private LocalDate date;
+    private String date;
 
     public DateMenu() {
-        this.id = UUID.randomUUID().toString(); 
-        this.date = LocalDate.now(); 
+        createOrderDate();
     }
-
-    public String getDateMenu(){
-        if(this.date == null || this.getDate() == null)
-            return "error";
-
+    private void createOrderDate(){
+        if (this.date == null) {
+            throw new ObjectNullException("Date is null...");
+        }
+        LocalDate myDate = LocalDate.now();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return this.getDate().format(dateFormatter);
+        this.date = myDate.format(dateFormatter);
     }   
-    
+
+
 }
-
-
-

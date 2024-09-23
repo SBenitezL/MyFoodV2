@@ -4,10 +4,12 @@ import java.util.UUID;
 import java.util.ArrayList;
 import com.unicauca.my_food.domain.menu.value_objects.DateMenu;
 import com.unicauca.my_food.domain.menu.value_objects.DishMenu;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNotFoundException;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
+
 import lombok.Getter;
 
 @Getter
-
 public class Menu {
     private String id;
     private List<DishMenu> dishes;
@@ -19,29 +21,27 @@ public class Menu {
         this.dishes = new ArrayList<>(); 
     }
 
-    public boolean addDish(DishMenu dish){
-        if (dish == null) return false;
+    public boolean addDish(DishMenu dish) {
+        if (this.dishes == null) 
+            throw new ObjectNullException("Dish list is null...");
+        if (dish == null) 
+            throw new ObjectNullException("Dish is null...");
         return this.dishes.add(dish);
     }
 
-    public boolean removeDish(String id){
-        //Devuelve true si un elemento es eliminado 
-        return this.dishes.removeIf(dish -> dish.getId().equals(id));
-    }
-
-    public DishMenu getDish(String id){
-        //Devuelve un platillo en especifico 
-        for (DishMenu dish : this.dishes) {
+    public boolean removeDish(String id) {
+        if (this.dishes == null) 
+            throw new ObjectNullException("Dish list is null...");
+        if (id.isBlank()) 
+            throw new ObjectNullException("Dish ID is null...");
+        for (int i = 0; i < this.dishes.size(); i++) {
+            DishMenu dish = this.dishes.get(i);
             if (dish.getId().equals(id)) {
-                return dish;
+                this.dishes.remove(i);
+                return true;
             }
         }
-        return null;
-    }
-
-    public List<DishMenu> getDishes() {
-        //Devuelve una lista de los platillos 
-        return this.dishes;
+        throw new ObjectNotFoundException("Dish not found...");
     }
 
 }
