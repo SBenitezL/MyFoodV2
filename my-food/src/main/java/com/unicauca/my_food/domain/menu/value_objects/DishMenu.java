@@ -3,6 +3,10 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import java.util.UUID;
+
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNotFoundException;
+import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
+
 import java.util.ArrayList;
 import lombok.NoArgsConstructor;
 @Getter
@@ -22,23 +26,35 @@ public class DishMenu {
     }
 
     public boolean addIngredient(IngredientDish ingredient) {
-        if (ingredient == null) return false;
-        return this.ingredients.add(ingredient);
+        if (this.ingredients == null) {
+            throw new ObjectNullException("Ingredients list is null...");
+        }
+
+        if (ingredient == null) {
+            throw new ObjectNullException("Ingredient is null...");
+        }
+
+        this.ingredients.add(ingredient);
+        return true;
     }
 
     public boolean removeIngredient(String id) {
-        if (id == null || this.ingredients == null) {
-            return false;
-        }
-
-        for (int i = 0; i < this.ingredients.size(); i++) {
-            if (this.ingredients.get(i).getId().equals(id)) { 
-                this.ingredients.remove(i);
-                return true; 
-            }
-        }
-        return false; 
-
+    if (this.ingredients == null) {
+        throw new ObjectNullException("Ingredients list is null...");
     }
+
+    if (id == null || id.isBlank()) {
+        throw new ObjectNullException("Ingredient's id is null or blank...");
+    }
+
+    for (int i = 0; i < this.ingredients.size(); i++) {
+        if (this.ingredients.get(i).getId().equals(id)) {
+            this.ingredients.remove(i);
+            return true;
+        }
+    }
+    throw new ObjectNotFoundException("Ingredient with id: " + id + " was not found...");
+}
+
 
 }
