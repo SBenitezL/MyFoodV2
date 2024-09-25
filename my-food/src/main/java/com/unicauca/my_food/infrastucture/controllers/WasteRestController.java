@@ -69,8 +69,8 @@ public class WasteRestController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @GetMapping("/product/details")
-    public ResponseEntity<String> getDetailsProduct(@RequestBody ProductWaste product) {
+    @GetMapping("/product/details/{id}")
+    public ResponseEntity<String> getDetailsProduct(@PathVariable("id") String productId, @RequestBody ProductWaste product) {
         String details = service.getDetailsProduct(product);
         return new ResponseEntity<String>(details, HttpStatus.OK);
     }

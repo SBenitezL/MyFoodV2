@@ -1,12 +1,14 @@
 package com.unicauca.my_food.domain.menu.service;
 
+import org.springframework.stereotype.Service;
+
 import com.unicauca.my_food.domain.menu.Menu;
 import com.unicauca.my_food.domain.menu.value_objects.DishMenu;
 import com.unicauca.my_food.domain.menu.value_objects.IngredientDish;
 import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNullException;
 
 
-
+@Service
 public class MenuDomainService implements IMenuDomainService {
 
     @Override

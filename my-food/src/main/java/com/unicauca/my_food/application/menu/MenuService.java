@@ -2,12 +2,15 @@ package com.unicauca.my_food.application.menu;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.unicauca.my_food.domain.menu.Menu;
 import com.unicauca.my_food.domain.menu.service.MenuDomainService;
 import com.unicauca.my_food.domain.menu.value_objects.DishMenu;
 import com.unicauca.my_food.infrastucture.exceptionHandler.ownException.ObjectNotFoundException;
 import com.unicauca.my_food.infrastucture.repositories.MenuRepository;
 
+@Service
 public class MenuService implements IMenuService {
 
    private final MenuDomainService serviceDomain;
