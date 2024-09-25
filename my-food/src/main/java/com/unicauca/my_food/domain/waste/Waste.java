@@ -10,11 +10,12 @@ import com.unicauca.my_food.domain.waste.constants.CauseWasteConstants;
 import com.unicauca.my_food.domain.waste.value_objects.CauseWaste;
 import com.unicauca.my_food.domain.waste.value_objects.QuantityWaste;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
+@AllArgsConstructor
 public class Waste {
     private String idWaste;
     private String productId;
@@ -30,6 +31,15 @@ public class Waste {
         this.cause = cause;
         this.dateRegister = new Date();
         this.productsWaste = new ArrayList<>();
+    }
+
+    public Waste() {
+        this.idWaste = UUID.randomUUID().toString();  
+        this.productId = "";  
+        this.quantityWaste = new QuantityWaste(0);  
+        this.cause = new CauseWaste();  
+        this.dateRegister = new Date();  
+        this.productsWaste = new ArrayList<>();  
     }
 
    /**
