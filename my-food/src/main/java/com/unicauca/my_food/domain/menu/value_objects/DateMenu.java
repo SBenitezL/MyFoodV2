@@ -12,16 +12,14 @@ public class DateMenu {
     private String date;
 
     public DateMenu() {
-        createOrderDate();
+        createMenuDate();
     }
-    private void createOrderDate(){
-        if (this.date == null) {
-            throw new ObjectNullException("Date is null...");
-        }
+    private void createMenuDate() {
         LocalDate myDate = LocalDate.now();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.date = myDate.format(dateFormatter);
-    }   
-
-
+        if (this.date == null) {
+            throw new ObjectNullException("Date is null...");
+        }
+    }
 }
