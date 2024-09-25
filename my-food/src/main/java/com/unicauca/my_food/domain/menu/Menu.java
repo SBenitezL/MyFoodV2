@@ -20,6 +20,11 @@ public class Menu {
         this.date = new DateMenu();
         this.dishes = new ArrayList<>(); 
     }
+    public Menu(String id, List<DishMenu> dishes, DateMenu date) {
+        this.id = id;
+        this.dishes = dishes;
+        this.date = date;
+    }
 
     public boolean addDish(DishMenu dish) {
         if (this.dishes == null) 

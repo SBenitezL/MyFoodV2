@@ -53,7 +53,7 @@ public class MenuRestController {
     }
     
     @DeleteMapping("dishes/{idMenu}/{idDish}")
-    public ResponseEntity<Menu> removeDishToOrder(@PathVariable String idMenu, 
+    public ResponseEntity<Menu> removeDishToMenu(@PathVariable String idMenu, 
                                                 @PathVariable String idDish){
                                                     Menu menu = this.service.removeDish(idMenu, idDish);
         return new ResponseEntity<Menu>(menu, HttpStatus.OK);
@@ -78,4 +78,27 @@ public class MenuRestController {
         List<DishMenu> dishes = this.service.getDishesOrder(idMenu);
         return new ResponseEntity<>(dishes, HttpStatus.OK);
     }
+
+    @PatchMapping("/ingredients/{idMenu}/{dishId}")
+public ResponseEntity<Menu> addIngredientsToDish(@PathVariable String idMenu, 
+                                                  @PathVariable String dishId, 
+                                                  @RequestParam List<String> ingredientNames) {
+    Menu menu = this.service.addIngredient(idMenu, dishId, ingredientNames);
+    return new ResponseEntity<>(menu, HttpStatus.OK);
+}
+
+    @DeleteMapping("/ingredients/{idMenu}/{dishId}/{ingredientId}")
+    public ResponseEntity<Menu> removeIngredientFromDish(@PathVariable String idMenu, 
+                                                           @PathVariable String dishId, 
+                                                           @PathVariable String ingredientId) {
+        Menu menu = this.service.removeIngredient(idMenu, dishId, ingredientId);
+        return new ResponseEntity<>(menu, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{idMenu}")
+    public ResponseEntity<Menu> removeMenu(@PathVariable String idMenu) {
+        Menu menu = this.service.removeMenu(idMenu);
+        return new ResponseEntity<>(menu, HttpStatus.OK);
+    }
+
 }

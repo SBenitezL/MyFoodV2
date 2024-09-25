@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MyFoodApplication<my-food>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.unicauca.my_food.MyFoodApplication",
+            "projectName": "my-food",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

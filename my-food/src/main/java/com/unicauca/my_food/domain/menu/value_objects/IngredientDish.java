@@ -1,4 +1,6 @@
 package com.unicauca.my_food.domain.menu.value_objects;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class IngredientDish {
     private String id; 
-    private String name;
-    private double cantidad; 
+    private List<String> name;
 }
 
